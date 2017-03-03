@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://karson.cc/"/>
-  <updated>2017-03-03T06:06:19.041Z</updated>
+  <updated>2017-03-03T09:47:03.742Z</updated>
   <id>http://karson.cc/</id>
   
   <author>
@@ -16,13 +16,45 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>hexo自动部署至VPS</title>
+    <link href="http://karson.cc/2017/03/03/webhook/"/>
+    <id>http://karson.cc/2017/03/03/webhook/</id>
+    <published>2017-03-03T06:14:15.000Z</published>
+    <updated>2017-03-03T09:47:03.742Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前每次写好一篇博文后，都是傻傻的打包利用Xftp手动传至VPS中。简直就是一个字“low~”。自从利用webhook实现自动部署后，腰不酸了，腿不疼了，可以扛两袋米一口气上五楼了~o(￣▽￣)o~ (小装一波~)。</p>
+<blockquote>
+<p>最终实现：自己电脑上新建文章后，hexo clean &amp;&amp; hexo g -d 即可。<br>实现原理：<br>1.hexo 提交代码渲染后文件至远程仓库(coding)<br>2.coding中对应项目配置webhook发送执行请求<br>3.vps 接收指定请求执行脚本(拉取最新代码)<br><a id="more"></a></p>
+</blockquote>
+<p>操作分为本机上和vps上的操作。</p>
+<h3 id="本机环境配置"><a href="#本机环境配置" class="headerlink" title="本机环境配置"></a>本机环境配置</h3><p>1.git<br>2.nodejs<br>3.hexo<br>未完待续。。。。。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前每次写好一篇博文后，都是傻傻的打包利用Xftp手动传至VPS中。简直就是一个字“low~”。自从利用webhook实现自动部署后，腰不酸了，腿不疼了，可以扛两袋米一口气上五楼了~o(￣▽￣)o~ (小装一波~)。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;最终实现：自己电脑上新建文章后，hexo clean &amp;amp;&amp;amp; hexo g -d 即可。&lt;br&gt;实现原理：&lt;br&gt;1.hexo 提交代码渲染后文件至远程仓库(coding)&lt;br&gt;2.coding中对应项目配置webhook发送执行请求&lt;br&gt;3.vps 接收指定请求执行脚本(拉取最新代码)&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="vps" scheme="http://karson.cc/tags/vps/"/>
+    
+      <category term="git" scheme="http://karson.cc/tags/git/"/>
+    
+      <category term="webhook" scheme="http://karson.cc/tags/webhook/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Linux下防御/减轻DDOS攻击</title>
     <link href="http://karson.cc/2017/03/03/ddos/"/>
     <id>http://karson.cc/2017/03/03/ddos/</id>
     <published>2017-03-03T05:30:03.000Z</published>
-    <updated>2017-03-03T06:06:19.041Z</updated>
+    <updated>2017-03-03T06:16:21.045Z</updated>
     
-    <content type="html"><![CDATA[<p>好久没管我的vps了，直到前天发现vpn居然用不了了，一脸懵逼。<br>登录后台就发现可能是被攻击了，导致被官方限制使用。<br><img src="/img/articleImg/vpsproblem.jpg" alt=""><br><a id="more"></a><br>被莫名的攻击后也是张二和尚摸不着头脑。<br>还能咋办叻?goole~&amp;baidu~<br>然后就开始了如下操作，也不知有没有用，O(∩_∩)O哈哈~</p>
+    <content type="html"><![CDATA[<p>好久没管我的vps了，直到前天发现vpn居然用不了了，一脸懵逼。<br>登录后台就发现可能是被攻击了，导致被官方限制使用。<br><img src="/img/articleImg/vpsproblem.jpg" alt=""><br><a id="more"></a><br>被莫名的攻击后也是张二和尚摸不着头脑。<br>还能咋办叻?Goole~&amp;Baidu~<br>然后就开始了如下操作，也不知有没有用，O(∩_∩)O哈哈~</p>
 <h2 id="DDoS-deflate介绍"><a href="#DDoS-deflate介绍" class="headerlink" title="DDoS deflate介绍"></a>DDoS deflate介绍</h2><blockquote>
 <p>DDoS deflate是一款免费的用来防御和减轻DDoS攻击的脚本。它通过&gt;netstat监测跟踪创建大量网络连接的IP地址，在检测到某个结点超过<br>预设的限 制时，该程序会通过APF或IPTABLES禁止或阻挡这些IP.</p>
 </blockquote>
@@ -40,7 +72,9 @@
     </summary>
     
     
-      <category term="-vps -ddos" scheme="http://karson.cc/tags/vps-ddos/"/>
+      <category term="vps" scheme="http://karson.cc/tags/vps/"/>
+    
+      <category term="ddos" scheme="http://karson.cc/tags/ddos/"/>
     
   </entry>
   

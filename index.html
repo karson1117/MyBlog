@@ -142,6 +142,64 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-webhook" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/03/webhook/">hexo自动部署至VPS</a>
+    </h1>
+  
+
+        <a href="/2017/03/03/webhook/" class="archive-article-date">
+  	<time datetime="2017-03-03T06:14:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-03</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前每次写好一篇博文后，都是傻傻的打包利用Xftp手动传至VPS中。简直就是一个字“low~”。自从利用webhook实现自动部署后，腰不酸了，腿不疼了，可以扛两袋米一口气上五楼了~o(￣▽￣)o~ (小装一波~)。</p>
+<blockquote>
+<p>最终实现：自己电脑上新建文章后，hexo clean &amp;&amp; hexo g -d 即可。<br>实现原理：<br>1.hexo 提交代码渲染后文件至远程仓库(coding)<br>2.coding中对应项目配置webhook发送执行请求<br>3.vps 接收指定请求执行脚本(拉取最新代码)<br>
+        
+          <a class="article-more-a" href="/2017/03/03/webhook/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vps/">vps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webhook/">webhook</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/03/webhook/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-ddos" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -173,7 +231,7 @@
       
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vps-ddos/">-vps -ddos</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ddos/">ddos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vps/">vps</a></li></ul>
 	</div>
 
       
@@ -367,10 +425,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">-vps -ddos</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">nginx</a>
               </li>
              
@@ -380,6 +434,18 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">vpn</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">webhook</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">ddos</a>
               </li>
             
             <div class="clearfix"></div>
