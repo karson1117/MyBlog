@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://karson.cc/"/>
-  <updated>2017-03-03T03:20:59.134Z</updated>
+  <updated>2017-01-06T02:31:44.585Z</updated>
   <id>http://karson.cc/</id>
   
   <author>
@@ -14,20 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>test</title>
-    <link href="http://karson.cc/2017/03/03/test/"/>
-    <id>http://karson.cc/2017/03/03/test/</id>
-    <published>2017-03-03T03:20:59.000Z</published>
-    <updated>2017-03-03T03:20:59.134Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>VPS安装及配置nginx</title>
