@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://karson.cc/"/>
-  <updated>2017-01-06T02:31:44.585Z</updated>
+  <updated>2017-03-03T06:06:19.041Z</updated>
   <id>http://karson.cc/</id>
   
   <author>
@@ -14,6 +14,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux下防御/减轻DDOS攻击</title>
+    <link href="http://karson.cc/2017/03/03/ddos/"/>
+    <id>http://karson.cc/2017/03/03/ddos/</id>
+    <published>2017-03-03T05:30:03.000Z</published>
+    <updated>2017-03-03T06:06:19.041Z</updated>
+    
+    <content type="html"><![CDATA[<p>好久没管我的vps了，直到前天发现vpn居然用不了了，一脸懵逼。<br>登录后台就发现可能是被攻击了，导致被官方限制使用。<br><img src="/img/articleImg/vpsproblem.jpg" alt=""><br><a id="more"></a><br>被莫名的攻击后也是张二和尚摸不着头脑。<br>还能咋办叻?goole~&amp;baidu~<br>然后就开始了如下操作，也不知有没有用，O(∩_∩)O哈哈~</p>
+<h2 id="DDoS-deflate介绍"><a href="#DDoS-deflate介绍" class="headerlink" title="DDoS deflate介绍"></a>DDoS deflate介绍</h2><blockquote>
+<p>DDoS deflate是一款免费的用来防御和减轻DDoS攻击的脚本。它通过&gt;netstat监测跟踪创建大量网络连接的IP地址，在检测到某个结点超过<br>预设的限 制时，该程序会通过APF或IPTABLES禁止或阻挡这些IP.</p>
+</blockquote>
+<h3 id="如何确认是否受到DDOS攻击？"><a href="#如何确认是否受到DDOS攻击？" class="headerlink" title="如何确认是否受到DDOS攻击？"></a>如何确认是否受到DDOS攻击？</h3><p>由于我是直接重装了系统，所以这一步仅供参考<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -ntu | <span class="type">awk</span> '&#123;print $<span class="number">5</span>&#125;' | <span class="type">cut</span> -d: -f1 | <span class="type">sort</span> | <span class="type">uniq</span> -c | <span class="type">sort</span> -n</div></pre></td></tr></table></figure></p>
+<p>据说：执行后，将会显示服务器上所有的每个IP多少个连接数。</p>
+<h3 id="1-安装DDoS-deflate"><a href="#1-安装DDoS-deflate" class="headerlink" title="1.安装DDoS deflate"></a>1.安装DDoS deflate</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget http:<span class="comment">//www.inetbase.com/scripts/ddos/install.sh   //下载DDoS  deflate</span></div><div class="line">chmod <span class="number">0700</span> install<span class="selector-class">.sh</span>    <span class="comment">//添加权限</span></div><div class="line">./install<span class="selector-class">.sh</span>             <span class="comment">//执行</span></div></pre></td></tr></table></figure>
+<h3 id="2-配置DDoS-deflate"><a href="#2-配置DDoS-deflate" class="headerlink" title="2.配置DDoS deflate"></a>2.配置DDoS deflate</h3><p>DDoS deflate的默认配置位于/usr/local/ddos/ddos.conf<br>内容如下<br><img src="/img/articleImg/ddosconf.png" alt=""></p>
+<p>查看/usr/local/ddos/ddos.sh文件的第117行<br>(vim模式下 跳转命令：行号 即可)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -ntu | awk ‘&#123;<span class="built_in">print</span> <span class="variable">$5</span>&#125;’ | cut <span class="_">-d</span>: <span class="_">-f</span>1 | sort | uniq -c | sort -nr &gt; <span class="variable">$BAD_IP_LIST</span></div></pre></td></tr></table></figure><br>修改为以下代码即可！<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -ntu | <span class="type">awk</span> ‘&#123;print $<span class="number">5</span>&#125;’ | <span class="type">cut</span> -d: -f1 | <span class="type">sed</span> -n ‘/[<span class="number">0</span><span class="number">-9</span>]/p’ | <span class="type">sort</span> | <span class="type">uniq</span> -c | <span class="type">sort</span> -nr &gt; $BAD_IP_LIST</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;好久没管我的vps了，直到前天发现vpn居然用不了了，一脸懵逼。&lt;br&gt;登录后台就发现可能是被攻击了，导致被官方限制使用。&lt;br&gt;&lt;img src=&quot;/img/articleImg/vpsproblem.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="-vps -ddos" scheme="http://karson.cc/tags/vps-ddos/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>webhook</title>
+    <link href="http://karson.cc/2017/03/03/webhook/"/>
+    <id>http://karson.cc/2017/03/03/webhook/</id>
+    <published>2017-03-03T05:24:13.000Z</published>
+    <updated>2017-03-03T05:24:13.788Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>VPS安装及配置nginx</title>
