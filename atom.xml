@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://karson.cc/"/>
-  <updated>2017-03-09T09:25:06.082Z</updated>
+  <updated>2017-03-09T09:55:26.504Z</updated>
   <id>http://karson.cc/</id>
   
   <author>
@@ -20,17 +20,23 @@
     <link href="http://karson.cc/2017/03/03/webhook/"/>
     <id>http://karson.cc/2017/03/03/webhook/</id>
     <published>2017-03-03T06:14:15.000Z</published>
-    <updated>2017-03-09T09:25:06.082Z</updated>
+    <updated>2017-03-09T09:55:26.504Z</updated>
     
     <content type="html"><![CDATA[<p>之前每次写好一篇博文后，都是傻傻的打包利用Xftp手动传至VPS中。简直就是一个字“low~”。自从利用webhook实现自动部署后，腰不酸了，腿不疼了，可以扛两袋米一口气上五楼了~o(￣▽￣)o~ (小装一波~)。</p>
 <blockquote>
 <p>最终实现：自己电脑上新建文章后，hexo clean &amp;&amp; hexo g -d 即可。<br>实现原理：<br>1.hexo 提交代码渲染后文件至远程仓库(coding)<br>2.coding中对应项目配置webhook发送执行请求<br>3.vps 接收指定请求执行脚本(拉取最新代码)<br><a id="more"></a></p>
 </blockquote>
 <p>操作分为本机上和vps上的操作。</p>
-<h3 id="hexo本地配置及部署"><a href="#hexo本地配置及部署" class="headerlink" title="hexo本地配置及部署"></a>hexo本地配置及部署</h3><h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h4><blockquote>
+<h3 id="hexo本地配置及部署"><a href="#hexo本地配置及部署" class="headerlink" title="hexo本地配置及部署"></a>hexo本地配置及部署</h3><blockquote>
 <p>hexo是基于nodejs开发的，npm是nodejs的包管理工具<br>git用于部署代码<br>所以首页应确认本机环境：git，node.js环境<br>git,node.js安装可另查资料</p>
 </blockquote>
-<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#安装hexo命令行工具</span></div><div class="line">npm install hexo-cli -g</div><div class="line"><span class="meta">#创建blog目录，并初始化hexo项目</span></div><div class="line">hexo init blog</div><div class="line">cd blog</div><div class="line">hexo <span class="keyword">new</span> <span class="string">"My First Post"</span></div><div class="line"><span class="meta">#启动本地服务，查看效果</span></div><div class="line">hexo server</div></pre></td></tr></table></figure>]]></content>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#安装hexo命令行工具</span></div><div class="line">npm install hexo-cli -g</div><div class="line"><span class="meta">#创建blog目录，并初始化hexo项目</span></div><div class="line">hexo init blog</div><div class="line">cd blog</div><div class="line">hexo <span class="keyword">new</span> <span class="string">"My First Post"</span></div><div class="line"><span class="meta">#生成相关静态文件</span></div><div class="line">hexo g</div><div class="line"><span class="meta">#启动本地服务，查看效果（http://localhost:4000）</span></div><div class="line">hexo server</div></pre></td></tr></table></figure>
+<p>hexo的git配置，hexo根目录下_config.yml文件中<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">deploy</span>:</div><div class="line">  <span class="attribute">type</span>: git</div><div class="line">  <span class="attribute">message</span>: update</div><div class="line">  <span class="attribute">repo</span>: git<span class="variable">@git</span>.coding.<span class="attribute">net</span>:letra/hexo.git </div></pre></td></tr></table></figure><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#代码部署</span></div><div class="line"><span class="attribute">hexo</span> deploy</div></pre></td></tr></table></figure><br>如果正确，然后在你的远程Git仓库中就有了hexo项目的相关文件了<br>重点来了！！！</p>
+<h3 id="远程仓库配置WebHooks"><a href="#远程仓库配置WebHooks" class="headerlink" title="远程仓库配置WebHooks"></a>远程仓库配置WebHooks</h3><p><img src="/img/articleImg/webhook.png" alt=""><br>这张图的配置的意思是：当仓库发生push的时候，会发送一个请求到<a href="http://imlianer.com/webhooks/push/123456。" target="_blank" rel="external">http://imlianer.com/webhooks/push/123456。</a></p>
+<p>为了服务端的简易处理，这里没有使用token，而是将url地址当做token，123456就充当了token的角色。</p>
+<p>到这，仓库这边的配置就完成了，接下来的问题就是服务器如何接收这个请求并重新部署hexo了。</p>
+<h3 id="VPS相关配置"><a href="#VPS相关配置" class="headerlink" title="VPS相关配置"></a>VPS相关配置</h3><p>在hexo目录中新建webhook.js,内容如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="keyword">require</span>(<span class="string">'http'</span>)</div><div class="line"><span class="keyword">var</span> exec = <span class="keyword">require</span>(<span class="string">'child_process'</span>).exec</div><div class="line">http.createServer(<span class="function"><span class="keyword">function</span> <span class="params">(req, res)</span> </span>&#123;</div><div class="line"><span class="comment">#该路径与WebHooks中的路径部分需要完全匹配，实现简易的授权认证。</span></div><div class="line"><span class="keyword">if</span>(req.url === <span class="string">'/webhooks/push/123456'</span>)&#123;</div><div class="line"><span class="comment">#如果url匹配，表示认证通过，则执行 sh ./deploy.sh</span></div><div class="line">exec(<span class="string">'sh ./deploy.sh'</span>)</div><div class="line">&#125;</div><div class="line">res.end()</div><div class="line">&#125;).listen(<span class="number">4002</span>)</div></pre></td></tr></table></figure><br>这段代码就能启动一个nodejs服务，监听4002端口。<br>当请求过来的url完全匹配的时候，执行deploy.sh。<br>再新建一个文件deploy.sh处理部署相关脚本，内容如下：<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull origin <span class="literal">master</span></div></pre></td></tr></table></figure><br>然后在服务器中启动nodejs服务监听webhooks<br>使用PM2执行脚本<a href="http://www.cnblogs.com/zhongweiv/p/pm2.html" target="_blank" rel="external">PM2</a><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> pm2 -g</div><div class="line">pm2 <span class="keyword">start</span> webhook.js</div></pre></td></tr></table></figure><br>然后可以在本机中hexo d 命令，vps就会自动更新hexo文件了…</p>
+]]></content>
     
     <summary type="html">
     
