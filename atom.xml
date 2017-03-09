@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://karson.cc/"/>
-  <updated>2017-03-03T09:47:03.742Z</updated>
+  <updated>2017-03-09T09:25:06.082Z</updated>
   <id>http://karson.cc/</id>
   
   <author>
@@ -20,15 +20,17 @@
     <link href="http://karson.cc/2017/03/03/webhook/"/>
     <id>http://karson.cc/2017/03/03/webhook/</id>
     <published>2017-03-03T06:14:15.000Z</published>
-    <updated>2017-03-03T09:47:03.742Z</updated>
+    <updated>2017-03-09T09:25:06.082Z</updated>
     
     <content type="html"><![CDATA[<p>之前每次写好一篇博文后，都是傻傻的打包利用Xftp手动传至VPS中。简直就是一个字“low~”。自从利用webhook实现自动部署后，腰不酸了，腿不疼了，可以扛两袋米一口气上五楼了~o(￣▽￣)o~ (小装一波~)。</p>
 <blockquote>
 <p>最终实现：自己电脑上新建文章后，hexo clean &amp;&amp; hexo g -d 即可。<br>实现原理：<br>1.hexo 提交代码渲染后文件至远程仓库(coding)<br>2.coding中对应项目配置webhook发送执行请求<br>3.vps 接收指定请求执行脚本(拉取最新代码)<br><a id="more"></a></p>
 </blockquote>
 <p>操作分为本机上和vps上的操作。</p>
-<h3 id="本机环境配置"><a href="#本机环境配置" class="headerlink" title="本机环境配置"></a>本机环境配置</h3><p>1.git<br>2.nodejs<br>3.hexo<br>未完待续。。。。。</p>
-]]></content>
+<h3 id="hexo本地配置及部署"><a href="#hexo本地配置及部署" class="headerlink" title="hexo本地配置及部署"></a>hexo本地配置及部署</h3><h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h4><blockquote>
+<p>hexo是基于nodejs开发的，npm是nodejs的包管理工具<br>git用于部署代码<br>所以首页应确认本机环境：git，node.js环境<br>git,node.js安装可另查资料</p>
+</blockquote>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#安装hexo命令行工具</span></div><div class="line">npm install hexo-cli -g</div><div class="line"><span class="meta">#创建blog目录，并初始化hexo项目</span></div><div class="line">hexo init blog</div><div class="line">cd blog</div><div class="line">hexo <span class="keyword">new</span> <span class="string">"My First Post"</span></div><div class="line"><span class="meta">#启动本地服务，查看效果</span></div><div class="line">hexo server</div></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
