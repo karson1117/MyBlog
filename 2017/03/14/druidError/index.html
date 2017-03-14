@@ -6,17 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://karson.cc">
-  <title>Karson&#39;s Blog</title>
+  <title>connection holder is null | Karson&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="随心所欲丶">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Karson's Blog">
-<meta property="og:url" content="http://karson.cc/index.html">
+  <meta name="description" content="“Druid提供的getConnection()或者getConnection(long maxWaitMillis)方法不能保证&amp;gt;在同一个线程中获取的始终是一个连接，直到显式的将连接关闭吗？”。必须在程序在缓存从Druid中取出的连接才能保证现一个事务在使用的是同一个连接。而抛出“connection holder is null”异常的原因可能在于：removeAbandonedTim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="connection holder is null">
+<meta property="og:url" content="http://karson.cc/2017/03/14/druidError/index.html">
 <meta property="og:site_name" content="Karson's Blog">
-<meta property="og:description" content="随心所欲丶">
+<meta property="og:description" content="“Druid提供的getConnection()或者getConnection(long maxWaitMillis)方法不能保证&amp;gt;在同一个线程中获取的始终是一个连接，直到显式的将连接关闭吗？”。必须在程序在缓存从Druid中取出的连接才能保证现一个事务在使用的是同一个连接。而抛出“connection holder is null”异常的原因可能在于：removeAbandonedTim">
+<meta property="og:updated_time" content="2017-03-14T03:09:44.687Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Karson's Blog">
-<meta name="twitter:description" content="随心所欲丶">
+<meta name="twitter:title" content="connection holder is null">
+<meta name="twitter:description" content="“Druid提供的getConnection()或者getConnection(long maxWaitMillis)方法不能保证&amp;gt;在同一个线程中获取的始终是一个连接，直到显式的将连接关闭吗？”。必须在程序在缓存从Druid中取出的连接才能保证现一个事务在使用的是同一个连接。而抛出“connection holder is null”异常的原因可能在于：removeAbandonedTim">
   
   
     <link rel="icon" href="/img/blog/favicon3.ico">
@@ -140,16 +141,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-druidError" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-druidError" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/14/druidError/">connection holder is null</a>
+    <h1 class="article-title" itemprop="name">
+      connection holder is null
     </h1>
   
 
@@ -168,6 +167,32 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/blog/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -180,312 +205,101 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/14/druidError/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://karson.cc/2017/03/14/druidError/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
 
-
-
-
-
-
-
-
   
-    <article id="post-Lambda" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/13/Lambda/">Lambda</a>
-    </h1>
-  
-
-        <a href="/2017/03/13/Lambda/" class="archive-article-date">
-  	<time datetime="2017-03-13T07:23:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-13</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Java8主要的改变是为集合框架增加了流的概念，提高了集合的抽象层次。相比于旧有框架直接操作数据的内部处理方式，流+高阶函数的外部处理方式对数据封装更好。同时流的概念使得对并发编程支持更强。<br>在语法上Java8提供了Lambda表达式来传递方法体,简化了之前方法必须藏身在不必要的类中的繁琐。Lambda表达式体现了函数式编程的思想，即一个函数亦可以作为另一个函数参数和返回值，使用了函数作参数/返回值的函数被称为高阶函数。</p>
-<h2 id="1-Lambda表达式"><a href="#1-Lambda表达式" class="headerlink" title="1.Lambda表达式"></a>1.Lambda表达式</h2><p>Java 被诟病为繁琐的地方就在于不支持传递方法，Java中的方法必须依赖类存在，也不能将方法作为参数或返回值，这是与python等语言相比的弱势。<br>Java 8中使用新特性Lambda表达式来改善这一点。<br>
-        
-          <a class="article-more-a" href="/2017/03/13/Lambda/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lambda/">Lambda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/13/Lambda/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-webhook" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/03/webhook/">hexo自动部署至VPS</a>
-    </h1>
-  
-
-        <a href="/2017/03/03/webhook/" class="archive-article-date">
-  	<time datetime="2017-03-03T06:14:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-03</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>之前每次写好一篇博文后，都是傻傻的打包利用Xftp手动传至VPS中。简直就是一个字“low~”。自从利用webhook实现自动部署后，腰不酸了，腿不疼了，可以扛两袋米一口气上五楼了~o(￣▽￣)o~ (小装一波~)。</p>
-<blockquote>
-<p>最终实现：自己电脑上新建文章后，hexo clean &amp;&amp; hexo g -d 即可。<br>实现原理：<br>1.hexo 提交代码渲染后文件至远程仓库(coding)<br>2.coding中对应项目配置webhook发送执行请求<br>3.vps 接收指定请求执行脚本(拉取最新代码)<br>
-        
-          <a class="article-more-a" href="/2017/03/03/webhook/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vps/">vps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webhook/">webhook</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/03/webhook/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-ddos" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/03/ddos/">Linux下防御/减轻DDOS攻击</a>
-    </h1>
-  
-
-        <a href="/2017/03/03/ddos/" class="archive-article-date">
-  	<time datetime="2017-03-03T05:30:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-03</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>好久没管我的vps了，直到前天发现vpn居然用不了了，一脸懵逼。<br>登录后台就发现可能是被攻击了，导致被官方限制使用。<br><img src="/img/articleImg/vpsproblem.jpg" alt=""><br>
-        
-          <a class="article-more-a" href="/2017/03/03/ddos/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ddos/">ddos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vps/">vps</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/03/ddos/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-vps-install-nginx" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/04/vps-install-nginx/">VPS安装及配置nginx</a>
-    </h1>
-  
-
-        <a href="/2017/01/04/vps-install-nginx/" class="archive-article-date">
-  	<time datetime="2017-01-04T05:43:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-04</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>反向代理（Reverse Proxy）方式是指以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个服务器。<br><img src="/img/articleImg/nginx.jpg" alt=""><br>
-        
-          <a class="article-more-a" href="/2017/01/04/vps-install-nginx/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/04/vps-install-nginx/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-vps" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/20/vps/">VPS搭建多端口VPN</a>
-    </h1>
-  
-
-        <a href="/2016/12/20/vps/" class="archive-article-date">
-  	<time datetime="2016-12-20T08:37:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-20</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>为了防止世界被破坏，为了守护世界的和平!<br>贯彻爱与真实的邪恶，可爱又迷人的反派角色!<br>世界辣么大~还不去看看！</p>
-</blockquote>
-<p><img src="/img/articleImg/naruto.jpg" alt=""><br>
-        
-          <a class="article-more-a" href="/2016/12/20/vps/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vpn/">vpn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vps/">vps</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/12/20/vps/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
+<nav id="article-nav">
   
   
+    <a href="/2017/03/13/Lambda/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Lambda</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="druidError" data-title="connection holder is null" data-url="http://karson.cc/2017/03/14/druidError/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Karson"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 
           </div>
@@ -507,8 +321,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
