@@ -146,6 +146,64 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-mapSort" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/15/mapSort/">Map按值排序</a>
+    </h1>
+  
+
+        <a href="/2017/03/15/mapSort/" class="archive-article-date">
+  	<time datetime="2017-03-15T05:37:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-15</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Map按值排序"><a href="#Map按值排序" class="headerlink" title="Map按值排序"></a>Map按值排序</h3><p>问题描述如下：</p>
+<blockquote>
+<p>现有Map<string,string>结构的数据，需要对其中包含的date值按降序排列输出<br>直观了解：<br>{<br>“zhanshan” :”{“date”:”2010-03-09 17:52:49:074”,”age”:”21”},<br>“lisi” :”{“date”:”2015-01-09 10:52:49:088”,”age”:”19”},<br>“zhaowu” :”{“date”:”2016-06-01 17:52:49:574”,”age”:”30”}<br>}<br>注：此Map的值也为String类型</string,string></p>
+</blockquote>
+<p>程序代码如下：<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> Object MapSortTest(<span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; <span class="built_in">map</span>) &#123;</div><div class="line"></div><div class="line">	<span class="built_in">List</span>&lt;<span class="built_in">Map</span>&lt;<span class="built_in">String</span>,<span class="built_in">String</span>&gt;&gt; resList=<span class="literal">new</span> ArrayList&lt;&gt;();</div><div class="line">      <span class="keyword">if</span>(!MapUtils.isEmpty(<span class="built_in">map</span>))&#123;</div><div class="line">	</div><div class="line">	<span class="comment">//取Map映射集，遍历时可以getKey()，getValue()</span></div><div class="line">        <span class="built_in">List</span>&lt;<span class="built_in">Map</span>.Entry&lt;<span class="built_in">String</span>,<span class="built_in">String</span>&gt;&gt; entryList=<span class="literal">new</span> ArrayList&lt;<span class="built_in">Map</span>.Entry&lt;<span class="built_in">String</span>,<span class="built_in">String</span>&gt;&gt;(<span class="built_in">map</span>.entrySet());</div><div class="line">	<span class="comment">//自定义比较器</span></div><div class="line">        Collections.sort(entryList, <span class="literal">new</span> Comparator&lt;<span class="built_in">Map</span>.Entry&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;&gt;()&#123;</div><div class="line">            @Override</div><div class="line">            <span class="keyword">public</span> int compare(<span class="built_in">Map</span>.Entry&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; entry1, <span class="built_in">Map</span>.Entry&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; entry2) &#123;</div><div class="line"></div><div class="line">                 <span class="built_in">String</span> str1=entry1.getValue();</div><div class="line">                 <span class="built_in">String</span> str2=entry2.getValue();</div><div class="line">		<span class="comment">//切割截取date的值，subString前闭后开[)</span></div><div class="line">                 <span class="built_in">String</span> date1=str1.substring(str1.indexOf(<span class="string">":"</span>)+<span class="number">2</span>,str1.indexOf(<span class="string">","</span>)<span class="number">-1</span>);</div><div class="line">                 <span class="built_in">String</span> date2=str2.substring(str2.indexOf(<span class="string">":"</span>)+<span class="number">2</span>,str2.indexOf(<span class="string">","</span>)<span class="number">-1</span>);</div><div class="line">                   try &#123;</div><div class="line">                      <span class="built_in">Date</span> d1=DateUtils.parseDate(date1,<span class="string">"yyyy-MM-dd HH:mm:ss:SSS"</span>);</div><div class="line">                      <span class="built_in">Date</span> d2=DateUtils.parseDate(date2,<span class="string">"yyyy-MM-dd HH:mm:ss:SSS"</span>);</div><div class="line">			<span class="comment">//日期降序</span></div><div class="line">                      <span class="keyword">return</span> d2.compareTo(d1);</div><div class="line">                    &#125; catch (ParseException e) &#123;</div><div class="line">                        e.printStackTrace();</div><div class="line">                        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">	     <span class="comment">//遍历排序后的映射集，封装返回</span></div><div class="line">            Iterator&lt;<span class="built_in">Map</span>.Entry&lt;<span class="built_in">String</span>,<span class="built_in">String</span>&gt;&gt; iter=entryList.iterator();</div><div class="line">            <span class="built_in">Map</span>.Entry&lt;<span class="built_in">String</span>,<span class="built_in">String</span>&gt; temEntry =<span class="built_in">null</span>;</div><div class="line">            <span class="keyword">while</span> (iter.hasNext())&#123;</div><div class="line">                <span class="built_in">Map</span>&lt;<span class="built_in">String</span>,<span class="built_in">String</span>&gt; sortedMap = <span class="literal">new</span> LinkedHashMap&lt;<span class="built_in">String</span>,<span class="built_in">String</span>&gt;();</div><div class="line">                temEntry=iter.next();</div><div class="line">                sortedMap.put(<span class="string">"type"</span>,temEntry.getKey());</div><div class="line">                sortedMap.put(<span class="string">"message"</span>,temEntry.getValue());</div><div class="line">                resList.add(sortedMap);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> resList;</div><div class="line">    &#125;</div><div class="line"></div></pre></td></tr></table></figure><br>说明:上述程序不直接返回sortedMap，而是将其放入List中，是为了便于解析及防止架构上可能的重新排序（若返回map，可能会按map的key排序）。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/note/">note</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/15/mapSort/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-druidError" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -543,14 +601,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">Lambda</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">vps</a>
               </li>
              
@@ -559,11 +609,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">Lambda</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">errors</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
+                <a href="javascript:void(0)">note</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -576,6 +634,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">webhook</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
               </li>
             
             <div class="clearfix"></div>
