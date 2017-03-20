@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://karson.cc/"/>
-  <updated>2017-03-15T06:47:36.569Z</updated>
+  <updated>2017-03-15T08:59:01.605Z</updated>
   <id>http://karson.cc/</id>
   
   <author>
@@ -14,6 +14,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Comparable 接口</title>
+    <link href="http://karson.cc/2017/03/15/Comparable/"/>
+    <id>http://karson.cc/2017/03/15/Comparable/</id>
+    <published>2017-03-15T08:37:39.000Z</published>
+    <updated>2017-03-15T08:59:01.605Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="compareTo-T-如何工作"><a href="#compareTo-T-如何工作" class="headerlink" title="compareTo(T)如何工作"></a>compareTo(T)如何工作</h3><p><img src="/img/articleImg/compare.png" alt=""></p>
+<blockquote>
+<p>compareTo()方法的工作原理是返回一个int值——或正，或负，或为零。它通过调用作为参数的对象来比较对象。负数表示调用的对象比参数“轻”。如果我们用大小来比较苹果，那么上面的调用会返回一个负数，例如-400，因为红苹果比青苹果小。如果两个苹果重量相等，那么调用将返回0。如果红苹果更重，那么compareTo()将返回一个正数，例如68。</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;compareTo-T-如何工作&quot;&gt;&lt;a href=&quot;#compareTo-T-如何工作&quot; class=&quot;headerlink&quot; title=&quot;compareTo(T)如何工作&quot;&gt;&lt;/a&gt;compareTo(T)如何工作&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/img
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://karson.cc/tags/java/"/>
+    
+      <category term="comparable" scheme="http://karson.cc/tags/comparable/"/>
+    
+      <category term="note" scheme="http://karson.cc/tags/note/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>童话镇</title>
+    <link href="http://karson.cc/2017/03/15/music/"/>
+    <id>http://karson.cc/2017/03/15/music/</id>
+    <published>2017-03-15T07:55:22.000Z</published>
+    <updated>2017-03-15T08:16:26.581Z</updated>
+    
+    <content type="html"><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=432506345&auto=1&height=66"></iframe>
+
+<blockquote>
+<p>给自己添点糖果~<br>愿你童心未泯，自找有趣。。。</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=&quot;330&quot; height=&quot;86&quot; src=&quot;//music.163.com/outchain/player?type=2&amp;id=
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Map按值排序</title>

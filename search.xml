@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title><![CDATA[Comparable 接口]]></title>
+      <url>http://karson.cc/2017/03/15/Comparable/</url>
+      <content type="html"><![CDATA[<h3 id="compareTo-T-如何工作"><a href="#compareTo-T-如何工作" class="headerlink" title="compareTo(T)如何工作"></a>compareTo(T)如何工作</h3><p><img src="/img/articleImg/compare.png" alt=""></p>
+<blockquote>
+<p>compareTo()方法的工作原理是返回一个int值——或正，或负，或为零。它通过调用作为参数的对象来比较对象。负数表示调用的对象比参数“轻”。如果我们用大小来比较苹果，那么上面的调用会返回一个负数，例如-400，因为红苹果比青苹果小。如果两个苹果重量相等，那么调用将返回0。如果红苹果更重，那么compareTo()将返回一个正数，例如68。</p>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[童话镇]]></title>
+      <url>http://karson.cc/2017/03/15/music/</url>
+      <content type="html"><![CDATA[<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=432506345&auto=1&height=66"></iframe>
+
+<blockquote>
+<p>给自己添点糖果~<br>愿你童心未泯，自找有趣。。。</p>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Map按值排序]]></title>
       <url>http://karson.cc/2017/03/15/mapSort/</url>
       <content type="html"><![CDATA[<h3 id="Map按值排序"><a href="#Map按值排序" class="headerlink" title="Map按值排序"></a>Map按值排序</h3><p>问题描述如下：</p>
