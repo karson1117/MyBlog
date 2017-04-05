@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://karson.cc">
-  <title>LocalDate | Karson&#39;s Blog</title>
+  <title>java8中如何处理时间 | Karson&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="随心所欲丶">
+  <meta name="description" content="Java8之前，Date类都是可变类当我们在多线程环境下使用它编程人员应该确认Date对象的线程安全Java8的Date和Time API提供了线程安全的不可变类编程人员不用考虑并发的问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LocalDate">
+<meta property="og:title" content="java8中如何处理时间">
 <meta property="og:url" content="http://karson.cc/2017/04/01/LocalDate/index.html">
 <meta property="og:site_name" content="Karson's Blog">
-<meta property="og:description" content="随心所欲丶">
-<meta property="og:updated_time" content="2017-04-01T05:12:06.378Z">
+<meta property="og:description" content="Java8之前，Date类都是可变类当我们在多线程环境下使用它编程人员应该确认Date对象的线程安全Java8的Date和Time API提供了线程安全的不可变类编程人员不用考虑并发的问题">
+<meta property="og:image" content="http://karson.cc/img/articleImg/time2.jpg">
+<meta property="og:updated_time" content="2017-04-05T09:22:09.373Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LocalDate">
-<meta name="twitter:description" content="随心所欲丶">
+<meta name="twitter:title" content="java8中如何处理时间">
+<meta name="twitter:description" content="Java8之前，Date类都是可变类当我们在多线程环境下使用它编程人员应该确认Date对象的线程安全Java8的Date和Time API提供了线程安全的不可变类编程人员不用考虑并发的问题">
+<meta name="twitter:image" content="http://karson.cc/img/articleImg/time2.jpg">
   
   
     <link rel="icon" href="/img/blog/favicon3.ico">
@@ -156,7 +158,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      LocalDate
+      java8中如何处理时间
     </h1>
   
 
@@ -167,7 +169,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>Java8之前，Date类都是可变类<br>当我们在多线程环境下使用它<br>编程人员应该确认Date对象的线程安全<br>Java8的Date和Time API提供了线程安全的不可变类<br>编程人员不用考虑并发的问题<br><img src="/img/articleImg/time2.jpg" alt=""><br><a id="more"></a></p>
+<h3 id="LocalDate用法"><a href="#LocalDate用法" class="headerlink" title="LocalDate用法"></a>LocalDate用法</h3><p>LocalDate只提供日期不提供时间信息。它是不可变类且线程安全的<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 取当前日期：</span></div><div class="line">LocalDate today = LocalDate.now(); <span class="comment">// -&gt; 2017-04-01</span></div><div class="line"><span class="comment">// 根据年月日取日期，04月就是04：</span></div><div class="line">LocalDate crischristmas = LocalDate.of(<span class="number">2017</span>, <span class="number">04</span>, <span class="number">01</span>); <span class="comment">// -&gt; 2017-04-01</span></div><div class="line"><span class="comment">// 根据字符串取：</span></div><div class="line">LocalDate endOfFeb = LocalDate.parse(<span class="string">"2017-04-01"</span>); </div><div class="line"><span class="comment">// 严格按照ISO yyyy-MM-dd验证，04写成4都不行，当然也有一个重载方法允许自己定义格式</span></div><div class="line">LocalDate.parse(<span class="string">"2017-02-29"</span>); <span class="comment">// 无效日期无法通过：DateTimeParseException: Invalid date...</span></div></pre></td></tr></table></figure><br>日期转换经常遇到，比如：<br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 取本月第1天：</span></div><div class="line">LocalDate firstDayOfThisMonth = today.with(TemporalAdjusters.firstDayOfMonth()); <span class="comment">// 2017-04-01</span></div><div class="line"><span class="comment">// 取本月第2天：</span></div><div class="line">LocalDate secondDayOfThisMonth = today.withDayOfMonth(<span class="number">2</span>); <span class="comment">// 2017-04-02</span></div><div class="line"><span class="comment">// 取本月最后一天，再也不用计算是28，29，30还是31：</span></div><div class="line">LocalDate lastDayOfThisMonth = today.with(TemporalAdjusters.lastDayOfMonth()); <span class="comment">// 2017-04-30</span></div><div class="line"><span class="comment">// 取下一天：</span></div><div class="line">LocalDate nextDayOf = lastDayOfThisMonth.plusDays(<span class="number">1</span>); <span class="comment">// 变成了2017-05-01</span></div><div class="line"><span class="comment">// 取2017年1月第一个周一，这个计算用Calendar要死掉很多脑细胞：</span></div><div class="line">LocalDate firstMondayOf2017 = LocalDate.parse(<span class="string">"2017-01-01"</span>).with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY)); <span class="comment">// 2017-01-02</span></div></pre></td></tr></table></figure></p>
+<h3 id="LocalTime"><a href="#LocalTime" class="headerlink" title="LocalTime"></a>LocalTime</h3><p>LocalTime只提供时间而不提供日期信息，它是不可变类且线程安全的<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">LocalTime now = LocalTime.now(); <span class="comment">// 11:09:09.240</span></div><div class="line">清除毫秒数：</div><div class="line">LocalTime now = LocalTime.now().withNano(<span class="number">0</span>)); <span class="comment">// 11:09:09</span></div><div class="line">构造时间：</div><div class="line">LocalTime zero = LocalTime.of(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>); <span class="comment">// 00:00:00</span></div><div class="line">LocalTime mid = LocalTime.parse(<span class="string">"12:00:00"</span>); <span class="comment">// 12:00:00</span></div></pre></td></tr></table></figure></p>
+<h3 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h3><p>最新JDBC映射将把数据库的日期类型和Java 8的新类型关联起来：</p>
+<blockquote>
+<p>date -&gt; LocalDate<br>time -&gt; LocalTime<br>timestamp -&gt; LocalDateTime</p>
+</blockquote>
+<p>再也不会出现映射到java.util.Date其中日期或时间某些部分为0的情况了.</p>
+
       
 
       
@@ -280,7 +290,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="LocalDate" data-title="LocalDate" data-url="http://karson.cc/2017/04/01/LocalDate/"></div>
+	<div class="ds-thread" data-thread-key="LocalDate" data-title="java8中如何处理时间" data-url="http://karson.cc/2017/04/01/LocalDate/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -380,15 +390,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">spring</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">Excel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
