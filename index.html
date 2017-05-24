@@ -150,6 +150,62 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-paramPass" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/24/paramPass/">java值传递还是引用传递</a>
+    </h1>
+  
+
+        <a href="/2017/05/24/paramPass/" class="archive-article-date">
+  	<time datetime="2017-05-24T07:48:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-24</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 由一道面试题引发的问题：java是值传递还是引用传递？<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> class Test &#123;</div><div class="line"></div><div class="line">    <span class="keyword">String</span> <span class="built_in">str</span>=<span class="string">"abc"</span>;</div><div class="line">    <span class="built_in">int</span> a[]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</div><div class="line">    <span class="built_in">int</span> i=<span class="number">1</span>;</div><div class="line">    <span class="keyword">void</span> change(<span class="keyword">String</span> <span class="built_in">str</span>,<span class="built_in">int</span> a[],<span class="built_in">int</span> i)&#123;</div><div class="line">        </div><div class="line">        <span class="built_in">str</span>=<span class="string">"cbd"</span>;</div><div class="line">        a[<span class="number">0</span>]=<span class="number">4</span>;</div><div class="line">        i=<span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</div><div class="line"></div><div class="line">        Test t=<span class="keyword">new</span> Test();</div><div class="line">        t.change(t.<span class="built_in">str</span>,t.a,t.i);</div><div class="line">        System.out.<span class="built_in">println</span>(t.<span class="built_in">str</span>);</div><div class="line">        System.out.<span class="built_in">println</span>(t.a[<span class="number">0</span>]);</div><div class="line">        System.out.<span class="built_in">println</span>(t.i++);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        
+          <a class="article-more-a" href="/2017/05/24/paramPass/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">-java</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/24/paramPass/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-LocalDate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -547,64 +603,6 @@
 
 
   
-    <article id="post-webhook" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/03/webhook/">hexo自动部署至VPS</a>
-    </h1>
-  
-
-        <a href="/2017/03/03/webhook/" class="archive-article-date">
-  	<time datetime="2017-03-03T06:14:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-03</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>之前每次写好一篇博文后，都是傻傻的打包利用Xftp手动传至VPS中。简直就是一个字“low~”。自从利用webhook实现自动部署后，腰不酸了，腿不疼了，可以扛两袋米一口气上五楼了~o(￣▽￣)o~ (小装一波~)。</p>
-<blockquote>
-<p>最终实现：自己电脑上新建文章后，hexo clean &amp;&amp; hexo g -d 即可。<br>实现原理：<br>1.hexo 提交代码渲染后文件至远程仓库(coding)<br>2.coding中对应项目配置webhook发送执行请求<br>3.vps 接收指定请求执行脚本(拉取最新代码)<br>
-        
-          <a class="article-more-a" href="/2017/03/03/webhook/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vps/">vps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webhook/">webhook</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/03/webhook/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -679,11 +677,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">Excel</a>
+                <a href="javascript:void(0)">errors</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -695,11 +689,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">git</a>
+                <a href="javascript:void(0)">spring</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">webhook</a>
+                <a href="javascript:void(0)">Excel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">-java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -707,11 +705,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">errors</a>
+                <a href="javascript:void(0)">vpn</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vpn</a>
+                <a href="javascript:void(0)">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">webhook</a>
               </li>
             
             <div class="clearfix"></div>

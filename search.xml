@@ -4,6 +4,20 @@
   
     
     <entry>
+      <title><![CDATA[java值传递还是引用传递]]></title>
+      <url>http://karson.cc/2017/05/24/paramPass/</url>
+      <content type="html"><![CDATA[<p> 由一道面试题引发的问题：java是值传递还是引用传递？<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> class Test &#123;</div><div class="line"></div><div class="line">    <span class="keyword">String</span> <span class="built_in">str</span>=<span class="string">"abc"</span>;</div><div class="line">    <span class="built_in">int</span> a[]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</div><div class="line">    <span class="built_in">int</span> i=<span class="number">1</span>;</div><div class="line">    <span class="keyword">void</span> change(<span class="keyword">String</span> <span class="built_in">str</span>,<span class="built_in">int</span> a[],<span class="built_in">int</span> i)&#123;</div><div class="line">        </div><div class="line">        <span class="built_in">str</span>=<span class="string">"cbd"</span>;</div><div class="line">        a[<span class="number">0</span>]=<span class="number">4</span>;</div><div class="line">        i=<span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</div><div class="line"></div><div class="line">        Test t=<span class="keyword">new</span> Test();</div><div class="line">        t.change(t.<span class="built_in">str</span>,t.a,t.i);</div><div class="line">        System.out.<span class="built_in">println</span>(t.<span class="built_in">str</span>);</div><div class="line">        System.out.<span class="built_in">println</span>(t.a[<span class="number">0</span>]);</div><div class="line">        System.out.<span class="built_in">println</span>(t.i++);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<blockquote>
+<p>运行结果<br>abc<br>4<br>1</p>
+</blockquote>
+<h3 id="1-按值传递是什么"><a href="#1-按值传递是什么" class="headerlink" title="1.按值传递是什么"></a>1.按值传递是什么</h3><p>指的是在方法调用时，传递的参数是按值的拷贝传递。<br>按值传递重要特点:传递的是值的拷贝，也就是说传递后就互不相关了。</p>
+<h3 id="2-按引用传递是什么"><a href="#2-按引用传递是什么" class="headerlink" title="2.按引用传递是什么"></a>2.按引用传递是什么</h3><p>指的是在方法调用时，传递的参数是按引用进行传递，其实传递的引用的地址，也就是变量所对应的内存空间的地址。<br>按引用传递的重要特点:<br>传递的是值的引用，也就是说传递前和传递后都指向同一个引用(也就是同一个内存空间)。</p>
+<p>详细博文见<a href="http://blog.csdn.net/zzp_403184692/article/details/8184751" target="_blank" rel="external">&gt;&gt;&gt;</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[java8中如何处理时间]]></title>
       <url>http://karson.cc/2017/04/01/LocalDate/</url>
       <content type="html"><![CDATA[<p>Java8之前，Date类都是可变类<br>当我们在多线程环境下使用它<br>编程人员应该确认Date对象的线程安全<br>Java8的Date和Time API提供了线程安全的不可变类<br>编程人员不用考虑并发的问题<br><img src="/img/articleImg/time2.jpg" alt=""><br><a id="more"></a></p>
