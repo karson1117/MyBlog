@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://karson.cc/"/>
-  <updated>2017-05-24T08:16:02.410Z</updated>
+  <updated>2017-05-25T07:20:28.380Z</updated>
   <id>http://karson.cc/</id>
   
   <author>
@@ -16,11 +16,44 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>javaMail发送邮件</title>
+    <link href="http://karson.cc/2017/05/25/javaMail/"/>
+    <id>http://karson.cc/2017/05/25/javaMail/</id>
+    <published>2017-05-25T06:39:47.000Z</published>
+    <updated>2017-05-25T07:20:28.380Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>使用163邮箱作为邮件测试时遇到身份验证不通过的问题,在此略做记录..</p>
+</blockquote>
+<a id="more"></a>    
+<h3 id="部分代码"><a href="#部分代码" class="headerlink" title="部分代码"></a>部分代码</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 发送邮件</div><div class="line"> * </div><div class="line"> * @param toAddress		: 收件人邮箱</div><div class="line"> * @param mailSubject	: 邮件主题</div><div class="line"> * @param mailBody		: 邮件正文</div><div class="line"> * @param mailBodyIsHtml: 邮件正文格式,true:HTML格式;false:文本格式</div><div class="line"> * //@param inLineFile	: 内嵌文件</div><div class="line"> * @param attachments	: 附件</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> sendMail (<span class="keyword">String</span> toAddress, <span class="keyword">String</span> mailSubject, <span class="keyword">String</span> mailBody, </div><div class="line">		<span class="keyword">boolean</span> mailBodyIsHtml, <span class="built_in">File</span>[] attachments)&#123;</div><div class="line">       <span class="built_in">try</span> &#123;</div><div class="line">		<span class="comment">// 创建邮件发送类 JavaMailSender (用于发送多元化邮件，包括附件，图片，html 等    )</span></div><div class="line">       	JavaMailSenderImpl mailSender = <span class="keyword">new</span> JavaMailSenderImpl();</div><div class="line">       	mailSender.setHost(host); 			<span class="comment">// 设置邮件服务主机    </span></div><div class="line">       	mailSender.setUsername(username); 	<span class="comment">// 发送者邮箱的用户名</span></div><div class="line">       	mailSender.setPassword(password); 	<span class="comment">// 发送者邮箱的密码</span></div><div class="line">       	</div><div class="line">		<span class="comment">//配置文件，用于实例化java.mail.session    </span></div><div class="line">		Properties pro = <span class="keyword">new</span> Properties();</div><div class="line">		pro.<span class="built_in">put</span>(<span class="string">"mail.smtp.auth"</span>, <span class="string">"true"</span>);		</div><div class="line">		pro.<span class="built_in">put</span>(<span class="string">"mail.smtp.socketFactory.port"</span>, port);</div><div class="line">		pro.<span class="built_in">put</span>(<span class="string">"mail.smtp.socketFactory.fallback"</span>, <span class="string">"false"</span>);</div><div class="line">		pro.<span class="built_in">put</span>(<span class="string">"mail.smtp.starttls.enable"</span>, <span class="string">"true"</span>);</div><div class="line">		mailSender.setJavaMailProperties(pro);</div><div class="line"></div><div class="line">		<span class="comment">//创建多元化邮件 (创建 mimeMessage 帮助类，用于封装信息至 mimeMessage)</span></div><div class="line">		MimeMessage mimeMessage = mailSender.createMimeMessage();</div><div class="line">		MimeMessageHelper helper = <span class="keyword">new</span> MimeMessageHelper(mimeMessage, ArrayUtils.isNotEmpty(attachments), <span class="string">"UTF-8"</span>);</div><div class="line">		</div><div class="line">		helper.setFrom(sendFrom, sendNick);</div><div class="line">		helper.setTo(toAddress);</div><div class="line"></div><div class="line">		helper.setSubject(mailSubject);</div><div class="line">		helper.setText(mailBody, mailBodyIsHtml); </div><div class="line">		</div><div class="line">		<span class="comment">// 添加内嵌文件，第1个参数为cid标识这个文件,第2个参数为资源</span></div><div class="line">		<span class="comment">//helper.addInline(MimeUtility.encodeText(inLineFile.getName()), inLineFile);	</span></div><div class="line">		</div><div class="line">		<span class="comment">// 添加附件    </span></div><div class="line">		<span class="built_in">if</span> (ArrayUtils.isNotEmpty(attachments)) &#123;</div><div class="line">			<span class="built_in">for</span> (<span class="built_in">File</span> file : attachments) &#123;</div><div class="line">				helper.addAttachment(MimeUtility.encodeText(file.getName()), file);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		mailSender.send(mimeMessage);</div><div class="line">		<span class="built_in">return</span> true;</div><div class="line">	&#125; <span class="built_in">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">return</span> false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="运行报错："><a href="#运行报错：" class="headerlink" title="运行报错："></a>运行报错：</h3><blockquote>
+<p>“Authentication failed; nested exception is javax.mail.AuthenticationFailedException: 550 User has no permission…..”</p>
+</blockquote>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>网易163邮箱 “设置–POP3/SMTP/IMAP” 中 “客户端授权” 未开启。<br>开启授权码后，它将代替邮箱密码在客户端使用。<br><img src="/img/articleImg/163sqm.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;使用163邮箱作为邮件测试时遇到身份验证不通过的问题,在此略做记录..&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://karson.cc/tags/java/"/>
+    
+      <category term="mail" scheme="http://karson.cc/tags/mail/"/>
+    
+  </entry>
+  
+  <entry>
     <title>java值传递还是引用传递</title>
     <link href="http://karson.cc/2017/05/24/paramPass/"/>
     <id>http://karson.cc/2017/05/24/paramPass/</id>
     <published>2017-05-24T07:48:36.000Z</published>
-    <updated>2017-05-24T08:16:02.410Z</updated>
+    <updated>2017-05-25T07:15:10.676Z</updated>
     
     <content type="html"><![CDATA[<p> 由一道面试题引发的问题：java是值传递还是引用传递？<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> class Test &#123;</div><div class="line"></div><div class="line">    <span class="keyword">String</span> <span class="built_in">str</span>=<span class="string">"abc"</span>;</div><div class="line">    <span class="built_in">int</span> a[]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</div><div class="line">    <span class="built_in">int</span> i=<span class="number">1</span>;</div><div class="line">    <span class="keyword">void</span> change(<span class="keyword">String</span> <span class="built_in">str</span>,<span class="built_in">int</span> a[],<span class="built_in">int</span> i)&#123;</div><div class="line">        </div><div class="line">        <span class="built_in">str</span>=<span class="string">"cbd"</span>;</div><div class="line">        a[<span class="number">0</span>]=<span class="number">4</span>;</div><div class="line">        i=<span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</div><div class="line"></div><div class="line">        Test t=<span class="keyword">new</span> Test();</div><div class="line">        t.change(t.<span class="built_in">str</span>,t.a,t.i);</div><div class="line">        System.out.<span class="built_in">println</span>(t.<span class="built_in">str</span>);</div><div class="line">        System.out.<span class="built_in">println</span>(t.a[<span class="number">0</span>]);</div><div class="line">        System.out.<span class="built_in">println</span>(t.i++);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
@@ -39,7 +72,7 @@
     </summary>
     
     
-      <category term="-java" scheme="http://karson.cc/tags/java/"/>
+      <category term="java" scheme="http://karson.cc/tags/java/"/>
     
   </entry>
   

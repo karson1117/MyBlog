@@ -6,17 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://karson.cc">
-  <title>Archives: 2017 | Karson&#39;s Blog</title>
+  <title>javaMail发送邮件 | Karson&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="随心所欲丶">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Karson's Blog">
-<meta property="og:url" content="http://karson.cc/archives/2017/index.html">
+  <meta name="description" content="使用163邮箱作为邮件测试时遇到身份验证不通过的问题,在此略做记录..">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javaMail发送邮件">
+<meta property="og:url" content="http://karson.cc/2017/05/25/javaMail/index.html">
 <meta property="og:site_name" content="Karson's Blog">
-<meta property="og:description" content="随心所欲丶">
+<meta property="og:description" content="使用163邮箱作为邮件测试时遇到身份验证不通过的问题,在此略做记录..">
+<meta property="og:image" content="http://karson.cc/img/articleImg/163sqm.png">
+<meta property="og:updated_time" content="2017-05-25T07:20:28.380Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Karson's Blog">
-<meta name="twitter:description" content="随心所欲丶">
+<meta name="twitter:title" content="javaMail发送邮件">
+<meta name="twitter:description" content="使用163邮箱作为邮件测试时遇到身份验证不通过的问题,在此略做记录..">
+<meta name="twitter:image" content="http://karson.cc/img/articleImg/163sqm.png">
   
   
     <link rel="icon" href="/img/blog/favicon3.ico">
@@ -148,401 +151,170 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-javaMail" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/25/javaMail/" class="archive-article-date">
-  	<time datetime="2017-05-25T06:39:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/25/javaMail/">javaMail发送邮件</a>
+    <h1 class="article-title" itemprop="name">
+      javaMail发送邮件
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        <a href="/2017/05/25/javaMail/" class="archive-article-date">
+  	<time datetime="2017-05-25T06:39:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-25</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>使用163邮箱作为邮件测试时遇到身份验证不通过的问题,在此略做记录..</p>
+</blockquote>
+<a id="more"></a>    
+<h3 id="部分代码"><a href="#部分代码" class="headerlink" title="部分代码"></a>部分代码</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 发送邮件</div><div class="line"> * </div><div class="line"> * @param toAddress		: 收件人邮箱</div><div class="line"> * @param mailSubject	: 邮件主题</div><div class="line"> * @param mailBody		: 邮件正文</div><div class="line"> * @param mailBodyIsHtml: 邮件正文格式,true:HTML格式;false:文本格式</div><div class="line"> * //@param inLineFile	: 内嵌文件</div><div class="line"> * @param attachments	: 附件</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> sendMail (<span class="keyword">String</span> toAddress, <span class="keyword">String</span> mailSubject, <span class="keyword">String</span> mailBody, </div><div class="line">		<span class="keyword">boolean</span> mailBodyIsHtml, <span class="built_in">File</span>[] attachments)&#123;</div><div class="line">       <span class="built_in">try</span> &#123;</div><div class="line">		<span class="comment">// 创建邮件发送类 JavaMailSender (用于发送多元化邮件，包括附件，图片，html 等    )</span></div><div class="line">       	JavaMailSenderImpl mailSender = <span class="keyword">new</span> JavaMailSenderImpl();</div><div class="line">       	mailSender.setHost(host); 			<span class="comment">// 设置邮件服务主机    </span></div><div class="line">       	mailSender.setUsername(username); 	<span class="comment">// 发送者邮箱的用户名</span></div><div class="line">       	mailSender.setPassword(password); 	<span class="comment">// 发送者邮箱的密码</span></div><div class="line">       	</div><div class="line">		<span class="comment">//配置文件，用于实例化java.mail.session    </span></div><div class="line">		Properties pro = <span class="keyword">new</span> Properties();</div><div class="line">		pro.<span class="built_in">put</span>(<span class="string">"mail.smtp.auth"</span>, <span class="string">"true"</span>);		</div><div class="line">		pro.<span class="built_in">put</span>(<span class="string">"mail.smtp.socketFactory.port"</span>, port);</div><div class="line">		pro.<span class="built_in">put</span>(<span class="string">"mail.smtp.socketFactory.fallback"</span>, <span class="string">"false"</span>);</div><div class="line">		pro.<span class="built_in">put</span>(<span class="string">"mail.smtp.starttls.enable"</span>, <span class="string">"true"</span>);</div><div class="line">		mailSender.setJavaMailProperties(pro);</div><div class="line"></div><div class="line">		<span class="comment">//创建多元化邮件 (创建 mimeMessage 帮助类，用于封装信息至 mimeMessage)</span></div><div class="line">		MimeMessage mimeMessage = mailSender.createMimeMessage();</div><div class="line">		MimeMessageHelper helper = <span class="keyword">new</span> MimeMessageHelper(mimeMessage, ArrayUtils.isNotEmpty(attachments), <span class="string">"UTF-8"</span>);</div><div class="line">		</div><div class="line">		helper.setFrom(sendFrom, sendNick);</div><div class="line">		helper.setTo(toAddress);</div><div class="line"></div><div class="line">		helper.setSubject(mailSubject);</div><div class="line">		helper.setText(mailBody, mailBodyIsHtml); </div><div class="line">		</div><div class="line">		<span class="comment">// 添加内嵌文件，第1个参数为cid标识这个文件,第2个参数为资源</span></div><div class="line">		<span class="comment">//helper.addInline(MimeUtility.encodeText(inLineFile.getName()), inLineFile);	</span></div><div class="line">		</div><div class="line">		<span class="comment">// 添加附件    </span></div><div class="line">		<span class="built_in">if</span> (ArrayUtils.isNotEmpty(attachments)) &#123;</div><div class="line">			<span class="built_in">for</span> (<span class="built_in">File</span> file : attachments) &#123;</div><div class="line">				helper.addAttachment(MimeUtility.encodeText(file.getName()), file);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		mailSender.send(mimeMessage);</div><div class="line">		<span class="built_in">return</span> true;</div><div class="line">	&#125; <span class="built_in">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">return</span> false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="运行报错："><a href="#运行报错：" class="headerlink" title="运行报错："></a>运行报错：</h3><blockquote>
+<p>“Authentication failed; nested exception is javax.mail.AuthenticationFailedException: 550 User has no permission…..”</p>
+</blockquote>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>网易163邮箱 “设置–POP3/SMTP/IMAP” 中 “客户端授权” 未开启。<br>开启授权码后，它将代替邮箱密码在客户端使用。<br><img src="/img/articleImg/163sqm.png" alt=""></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/blog/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mail/">mail</a></li></ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://karson.cc/2017/05/25/javaMail/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/24/paramPass/" class="archive-article-date">
-  	<time datetime="2017-05-24T07:48:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/24/paramPass/">java值传递还是引用传递</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-	</div>
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/05/24/paramPass/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java值传递还是引用传递</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/01/LocalDate/" class="archive-article-date">
-  	<time datetime="2017-04-01T05:12:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/01/LocalDate/">java8中如何处理时间</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/31/springmvcpost/" class="archive-article-date">
-  	<time datetime="2017-03-31T08:18:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-31</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/31/springmvcpost/">springmvc导出Excel问题记录</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Excel/">Excel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
-	</div>
 
-          
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="javaMail" data-title="javaMail发送邮件" data-url="http://karson.cc/2017/05/25/javaMail/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Karson"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/20/mvcdemo/" class="archive-article-date">
-  	<time datetime="2017-03-20T06:09:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/20/mvcdemo/">IDEA+Maven+SpringMVC+Hibernate环境搭建</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/15/Comparable/" class="archive-article-date">
-  	<time datetime="2017-03-15T08:37:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/15/Comparable/">Comparable 接口</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/comparable/">comparable</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/note/">note</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/15/mapSort/" class="archive-article-date">
-  	<time datetime="2017-03-15T05:37:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/15/mapSort/">Map按值排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/note/">note</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/14/druidError/" class="archive-article-date">
-  	<time datetime="2017-03-14T02:58:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/14/druidError/">connection holder is null</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/errors/">errors</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/13/Lambda/" class="archive-article-date">
-  	<time datetime="2017-03-13T07:23:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/13/Lambda/">Lambda</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lambda/">Lambda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/03/webhook/" class="archive-article-date">
-  	<time datetime="2017-03-03T06:14:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/03/webhook/">hexo自动部署至VPS</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vps/">vps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webhook/">webhook</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/03/03/ddos/" class="archive-article-date">
-  	<time datetime="2017-03-03T05:30:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/03/ddos/">Linux下防御/减轻DDOS攻击</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ddos/">ddos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vps/">vps</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/01/04/vps-install-nginx/" class="archive-article-date">
-  	<time datetime="2017-01-04T05:43:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/04/vps-install-nginx/">VPS安装及配置nginx</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -565,8 +337,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
