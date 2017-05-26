@@ -150,6 +150,63 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-druidError" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/14/druidError/">connection holder is null</a>
+    </h1>
+  
+
+        <a href="/2017/03/14/druidError/" class="archive-article-date">
+  	<time datetime="2017-03-14T02:58:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-14</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>“Druid提供的getConnection()或者getConnection(long maxWaitMillis)方法不能保证&gt;在同一个线程中获取的始终是一个连接，直到显式的将连接关闭吗？”。<br>必须在程序在缓存从Druid中取出的连接才能保证现一个事务在使用的是同一个连接。<br>而抛出“connection holder is null”异常的原因可能在于：<br>removeAbandonedTimeout //关闭长时间不使用的连接超时时间,单位秒,默认30*1000</p>
+</blockquote>
+<p>假设这个参数的值为30分钟,当一个连接在获取后30分钟还没释放,也就是Connection的DruidPooledPreparedStatement对象执行完了executXXX()方法但还未执行close、commit、rollback方法,对应于Connection的running参数的值为false,这时Durid的DestroyConnectionThread线程会自动将该连接回收。当程序要commit()连接时会执行checkState()方法,这个方法会执行以下代码：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(holder ==<span class="literal">null</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (disableError != <span class="literal">null</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="type">SQLException</span>(<span class="string">"connection holder is null"</span>, disableError);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="type">SQLException</span>(<span class="string">"connection holder is null"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure><br>这段代码就是我们看到的“connection holder is null”异常的来源，因此，我们需要做的就是根据Druid提供的监控信息（主要看“连接持有时间分布”的值）修改这个参数的值，它的值一定要比最长的连接持有时间还要大。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/errors/">errors</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/14/druidError/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-Lambda" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -510,10 +567,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">errors</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)">vps</a>
               </li>
              
@@ -522,11 +575,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">-java -mail</a>
+                <a href="javascript:void(0)">errors</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">-java</a>
+                <a href="javascript:void(0)">-java -List -Set</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">mail</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -538,11 +595,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">vpn</a>
+                <a href="javascript:void(0)">nginx</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">nginx</a>
+                <a href="javascript:void(0)">vpn</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,10 +608,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">webhook</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">mail</a>
               </li>
             
             <div class="clearfix"></div>
